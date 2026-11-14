@@ -24,26 +24,26 @@ let myChart = null;
 let profCount = 0;
 let lossCount = 0;
 let data = [];
-
+let len = 0;
+let fetched = [];
 
 let c1, c2, c3, c4, c5, c6;
 c1=c2=c3=c4=c5=c6=0;
 
 
-fetched = JSON.parse(localStorage.getItem("strData"));
-let len = fetched.length;
+
 
 
 
 //calls the fetching fuction on loading of the website
 document.addEventListener("DOMContentLoaded", () => {
-    fetched = JSON.parse(localStorage.getItem("strData"))
+    fetched = JSON.parse(localStorage.getItem("strData")) || [];
 
-    for (let i = 0; i < fetched.length; i++) {
-        appendTable(i)
+    len = fetched.length;
+
+    for (let i = 0; i < len; i++) {
+        appendTable(i);
     }
-
-    let count = 0;
 });
 
 // adding mouse down events for form visibility and hiding
