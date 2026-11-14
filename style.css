@@ -1,0 +1,559 @@
+
+/* root variables */
+
+:root {
+
+    /* colors */
+    --green-color: #12c48b;
+    --red-color: #f14c52;
+    --gray-color: #d6d6d67d;
+    --yellow-color: #FFBF53;
+    --background-color: #f4f7fa;
+    --blue-color: #426CAE;
+
+    /* spacing */
+    --default-padding: 20px;
+    --space-s: 10px;
+}
+
+
+/* basics */
+
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: "Fira Sans";
+}
+
+
+body,
+html {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+main {
+    display: flex;
+    border: 1px solid var(--gray-color);
+    height: 100%;
+    max-width: 1400px;
+    width: 100%;
+}
+
+
+.sideNav {
+    display: flex;
+    max-width: 250px;
+    width: 100%;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+    padding-bottom: var(--default-padding);
+    padding-top: var(--default-padding);
+    padding-left: var(--space-s);
+    border: 1px solid rgba(128, 128, 128, 0.253);
+    max-height: 100vh;
+}
+
+
+.sideNavUpper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--default-padding);
+    width: 100%;
+}
+
+
+.sideNavFirst {
+    color: var(--red-color);
+    font-weight: bold;
+}
+
+
+.sideNavSecond {
+    color: var(--green-color);
+    font-weight: bold;
+}
+
+
+.sideNavThird {
+    color: var(--yellow-color);
+    font-weight: bold;
+}
+
+
+.sideNavTop {
+    display: flex;
+    font-size: 2rem;
+    padding-left: var(--space-s);
+}
+
+
+.sideNavMid > ul > li > a {
+    display: flex;
+    text-decoration: none;
+    padding-right: var(--space-s);
+    padding-bottom: var(--space-s);
+    padding-top: var(--space-s);
+    padding-left: var(--space-s);
+}
+
+
+.sideNavMid > ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-s);
+    border-top: 1px solid var(--gray-color);
+    padding: var(--space-s);
+}
+
+
+.sideNavMid > ul > li {
+    border-radius: 5px;
+    transition: 100ms ease-out;
+}
+
+
+.sideNavMid > ul > li:hover {
+    background-color: var(--gray-color);
+    transition: 100ms ease-in;
+}
+
+
+.navLinks {
+    color: black;
+    display: flex;
+    gap: var(--space-s);
+}
+
+
+.navLinks > p {
+    font-weight: 300;
+}
+
+
+.sideNavLower {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: var(--space-s);
+    transition: 100ms ease-out;
+    padding: var(--space-s);
+    border-radius: 5px;
+    max-width: 225px;
+    width: 100%;
+}
+
+
+.sideNavLower:hover {
+    background-color: var(--gray-color);
+    transition: 100ms ease-in;
+}
+
+
+.sideNavLowerChild {
+    display: flex;
+    gap: var(--space-s);
+}
+
+
+.sideNavAccountPfp {
+    font-size: 2rem;
+}
+
+
+.sideNavAccountName {
+    font-style: 2rem;
+    font-weight: 300;
+}
+
+
+.userType {
+    font-size: 0.7rem;
+}
+
+
+.main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+
+nav {
+    height: 81px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--gray-color);
+    min-width: 100%;
+    width: 100%;
+    padding-left: var(--default-padding);
+    padding-right: var(--default-padding);
+}
+
+
+.mainNavLeft {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+}
+
+
+.aboveSection {
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: gray;
+}
+
+
+.bottomSection {
+    font-weight: 350;
+}
+
+
+.mainNavRight > button {
+    border: none;
+    background-color: var(--red-color);
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: white;
+    padding: var(--space-s);
+    cursor: pointer;
+    transition: 200ms ease-out;
+}
+
+
+.mainNavRight > button:hover {
+    background-color: #e8343a;
+    transition: 200ms ease-in;
+}
+
+
+.contentParent {
+    padding: var(--default-padding);
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+
+.content {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+
+.dataBox {
+    border: 1px solid var(--gray-color);
+    padding: var(--space-s);
+    border-radius: 5px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    max-width: 300px;
+    width: 100%;
+}
+
+
+.contentChildLeft {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--gray-color);
+    border-radius: 5px;
+    background-image: linear-gradient(#fff, var(--gray-color));
+}
+
+
+.contentChildLeft > i {
+    font-size: 1.5rem;
+}
+
+
+.contentChildRight {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.7rem;
+    color: gray;
+}
+
+
+.data {
+    font-size: 1.5rem;
+    color: black;
+    font-weight: 500;
+}
+
+
+.graphs {
+    max-width: 1400px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 20px;
+}
+
+
+.graphs > * {
+    border-radius: 5px;
+    background-color: var(--gray-color);
+    height: 300px;
+}
+
+
+#myChartp {
+    max-width: 100%;
+    max-height: 300px;
+}
+
+
+.recents {
+    max-width: 1400px;
+    width: 100%;
+    border: 1px solid var(--gray-color);
+    border-radius: 5px;
+    max-height: 250px;
+    min-height: 248px;
+}
+
+
+.recentsTitle {
+    padding: var(--space-s) auto;
+    padding: var(--space-s);
+}
+
+
+.recentsTable {
+    width: 100%;
+    max-height: 206px;
+    overflow-y: scroll;
+}
+
+
+table {
+    width: 100%;
+    border: 1px solid var(--gray-color);
+    max-height: 206px;
+}
+
+
+.recentsTable {
+    width: 100%;
+}
+
+
+tr {
+    border: 1px solid var(--gray-color);
+}
+
+
+th {
+    border: 1px solid var(--gray-color);
+}
+
+
+td {
+    border: 1px solid var(--gray-color);
+}
+
+
+.recentsTable table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+
+.tableHead,
+.tableData {
+    display: table-row;
+}
+
+
+.tableHead th,
+.tableData td {
+    padding: 10px;
+}
+
+
+.tableHead {
+    position: sticky;
+}
+
+
+.tableHead > th {
+    font-weight: 400;
+}
+
+
+.tableData > td {
+    font-weight: 300;
+}
+
+
+.tableHead th:nth-child(1),
+.tableData td:nth-child(1) {
+    text-align: start;
+}
+
+
+.tableHead th:nth-child(2),
+.tableData td:nth-child(2) {
+    text-align: start;
+}
+
+
+.tableHead th:nth-child(3),
+.tableData td:nth-child(3) {
+    text-align: start;
+}
+
+
+.tableHead th:nth-child(3),
+.tableData td:nth-child(3) {
+    text-align: start;
+}
+
+
+.tableHead th:nth-child(4),
+.tableData td:nth-child(4) {
+    text-align: start;
+}
+
+
+.tableHead th:nth-child(5),
+.tableData td:nth-child(5) {
+    text-align: start;
+}
+
+
+.special-child {
+    text-align: center;
+}
+
+
+.tableHead th,
+.tableData td {
+    vertical-align: top;
+}
+
+
+.profit {
+    color: var(--green-color);
+}
+
+
+.loss {
+    color: var(--red-color);
+}
+
+
+.moneyLeft {
+    color: var(--yellow-color)
+}
+
+
+.savingsColor {
+    color: var(--blue-color);
+}
+
+
+.closer {
+    width: 100%;
+    text-align: right;
+}
+
+
+.form {
+    position: absolute;
+    background-color: #f8f9fa00;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    max-width: 500px;
+    padding: var(--default-padding);
+    border-radius: 5px;
+    border: 1px solid var(--gray-color);
+    backdrop-filter: blur(10px);
+}
+
+
+form {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--default-padding);
+}
+
+
+form > * {
+    font-size: 1.1rem;
+    font-weight: 300;
+    padding: var(--space-s);
+    border: none;
+    outline: none;
+}
+
+
+select {
+    background-color: white;
+}
+
+
+@media screen and (width < 944px) {
+
+    .navLinks {
+        display: flex;
+        justify-content: center;
+    }
+
+    .sideNav {
+        width: 100px;
+    }
+
+    .sideNavMid > ul > li > a > p {
+        display: none;
+    }
+
+    .sideNavAccountName {
+        display: none;
+    }
+}
+
+
+@media screen and (width < 844px) {
+
+    .content {
+        display: grid;
+        justify-content: center;
+        grid-template-columns: 300px 1fr;
+        gap: 20px;
+    }
+
+    .dataBox {
+        max-width: 100%;
+    }
+}
+
+
+.hidden {
+    display: none;
+    transition: 200ms ease-in;
+}

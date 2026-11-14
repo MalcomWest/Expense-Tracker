@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Jost:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Saira:ital,wght@0,100..900;1,100..900&family=Tiny5+Duo:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
+        integrity="..."
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    >
+</head>
+
+<body>
+    <main>
+        <div class="sideNav">
+            <div class="sideNavUpper">
+                <div class="sideNavTop">
+                    <p>
+                        <span class="sideNavFirst">₹</span>
+                        <span class="sideNavSecond">$</span>
+                        <span class="sideNavThird">¥</span>
+                    </p>
+                </div>
+
+                <div class="sideNavMid">
+                    <ul>
+                        <li>
+                            <a href="" class="navLinks">
+                                <i class="fa-solid fa-table" style="color: rgb(0, 0, 0);"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="" class="navLinks">
+                                <i class="fa-solid fa-receipt" style="color: rgb(0, 0, 0);"></i>
+                                <p>Transaction</p>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="" class="navLinks">
+                                <i class="fa-solid fa-tag" style="color: rgb(0, 0, 0);"></i>
+                                <p>Categories</p>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="" class="navLinks">
+                                <i class="fa-solid fa-chart-simple" style="color: rgb(0, 0, 0);"></i>
+                                <p>Budget</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sideNavLower">
+                <div class="sideNavLowerChild">
+                    <div class="sideNavAccountPfp">
+                        <i class="fa-solid fa-user" style="color: rgb(0, 0, 0);"></i>
+                    </div>
+
+                    <div class="sideNavAccountName">
+                        <p>Guest User</p>
+                        <p class="userType">Admin</p>
+                    </div>
+                </div>
+
+                <i class="fa-solid fa-up-down" style="color: rgb(0, 0, 0);"></i>
+            </div>
+        </div>
+
+        <div class="main">
+            <nav>
+                <div class="mainNavLeft">
+                    <div class="aboveSection">Dashboard</div>
+                    <div class="currentSection">Dashboard</div>
+                </div>
+
+                <div class="mainNavRight">
+                    <button id="expAdd">+ Add Transaction</button>
+                </div>
+            </nav>
+
+            <div class="contentParent">
+                <div class="content">
+                    <div class="expenses dataBox">
+                        <div class="contentChildLeft">
+                            <i class="fa-regular fa-calendar-days" style="color: rgb(255, 0, 0);"></i>
+                        </div>
+
+                        <div class="contentChildRight">
+                            <p>Total Expenses</p>
+                            <p id="ExpenseAmount" class="data loss">₹ 0</p>
+                        </div>
+                    </div>
+
+                    <div class="income dataBox">
+                        <div class="contentChildLeft">
+                            <i class="fa-solid fa-money-check-dollar profit"></i>
+                        </div>
+
+                        <div class="contentChildRight">
+                            <p>Total Income</p>
+                            <p id="incomeAmount" class="data profit">₹ 0</p>
+                        </div>
+                    </div>
+
+                    <div class="budget dataBox">
+                        <div class="contentChildLeft">
+                            <i class="fa-solid fa-hand-holding-dollar moneyLeft"></i>
+                        </div>
+
+                        <div class="contentChildRight">
+                            <p>Money Left</p>
+                            <p id="moneyLeftAmt" class="data moneyLeft">₹ 0</p>
+                        </div>
+                    </div>
+
+                    <div class="saving dataBox">
+                        <div class="contentChildLeft">
+                            <i class="fa-solid fa-piggy-bank savingsColor"></i>
+                        </div>
+
+                        <div class="contentChildRight">
+                            <p>Last Month Savings</p>
+                            <p id="ExpenseAmount" class="data savingsColor">₹ 0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="graphs">
+                    <div class="circleChart">
+                        <div>
+                            <canvas id="myChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="lineChart">
+                        <div>
+                            <canvas id="myChartp"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recents">
+                    <div class="recentsTitle">
+                        Transaction History
+                    </div>
+
+                    <div class="recentsTable">
+                        <table id="tb">
+                            <tr align="start" class="tableHead">
+                                <th>DESCRIPTION</th>
+                                <th>CATEGORY</th>
+                                <th>AMOUNT</th>
+                                <th>STATUS</th>
+                                <th>DATE</th>
+                                <th id="special">Delete Element</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form hidden" id="forms">
+                <form id="frm">
+                    <div class="closer" id="close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+
+                    <input
+                        placeholder="DESCRIPTION"
+                        type="text"
+                        name="DESCRIPTION"
+                        id="DESCRIPTION"
+                    >
+
+                    <select name="category" id="category">
+                        <option value="">
+                            <option value="">Select Category</option>
+                            <option value="Income">Income</option>
+                            <option value="Food & Groceries">Food & Groceries</option>
+                            <option value="Housing & Bills">Housing & Bills</option>
+                            <option value="Shopping & Lifestyle">Shopping & Lifestyle</option>
+                            <option value="Health & Education">Health & Education</option>
+                            <option value="Entertainment & Recreation">Entertainment & Recreation</option>
+                            <option value="Miscellaneous">Miscellaneous</option>
+                        </option>
+                    </select>
+
+                    <input
+                        placeholder="AMOUNT"
+                        type="text"
+                        name="AMOUNT"
+                        id="amount"
+                        value="₹ "
+                    >
+
+                    <select name="STATUS" id="status">
+                        <option value="pending">pending</option>
+                        <option value="done">done</option>
+                    </select>
+
+                    <input type="date" name="DATE" id="date">
+
+                    <div class="mainNavRight">
+                        <button id="adder">+ Add Expenses</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
