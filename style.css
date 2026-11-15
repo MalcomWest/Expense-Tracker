@@ -39,7 +39,6 @@ main {
     display: flex;
     border: 1px solid var(--gray-color);
     height: 100%;
-    max-width: 1400px;
     width: 100%;
 }
 
@@ -55,7 +54,6 @@ main {
     padding-top: var(--default-padding);
     padding-left: var(--space-s);
     border: 1px solid rgba(128, 128, 128, 0.253);
-    max-height: 100vh;
 }
 
 
@@ -240,7 +238,9 @@ nav {
 
 
 .contentParent {
-    padding: var(--default-padding);
+    padding-top: var(--default-padding);
+    padding-left: var(--default-padding);
+    padding-right: var(--default-padding);
     display: flex;
     gap: 20px;
     flex-direction: column;
@@ -300,7 +300,6 @@ nav {
 
 
 .graphs {
-    max-width: 1400px;
     width: 100%;
     display: grid;
     grid-template-columns: 300px 1fr;
@@ -322,7 +321,6 @@ nav {
 
 
 .recents {
-    max-width: 1400px;
     width: 100%;
     border: 1px solid var(--gray-color);
     border-radius: 5px;
