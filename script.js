@@ -14,11 +14,12 @@ const totalExp = document.getElementById("ExpenseAmount");
 const income = document.getElementById("incomeAmount");
 const moneyLeftAmt = document.getElementById("moneyLeftAmt");
 
-let dataArr = JSON.parse(localStorage.getItem("strData")) || [];
+
+
 
 const ww = document.getElementById('myChartp');
 const ctx = document.getElementById('myChart');
-
+let dataArr = []
 let myPi = null;
 let myChart = null;
 let profCount = 0;
@@ -38,12 +39,17 @@ c1=c2=c3=c4=c5=c6=0;
 //calls the fetching fuction on loading of the website
 document.addEventListener("DOMContentLoaded", () => {
     fetched = JSON.parse(localStorage.getItem("strData")) || [];
-
-    len = fetched.length;
+    dataArr = [...fetched]
+    len = dataArr.length;
 
     for (let i = 0; i < len; i++) {
         appendTable(i);
     }
+
+    if (dataArr != "") {
+        plotGraph(dataArr)
+    }
+
 });
 
 // adding mouse down events for form visibility and hiding
@@ -65,7 +71,7 @@ function addingEvent() {
 
 
 addingEvent();
-
+let i = 0;
 // stores data in localstorage
 addeer.addEventListener('mouseup', (e)=>{
 
@@ -99,8 +105,35 @@ addeer.addEventListener('mouseup', (e)=>{
         localStorage.setItem("strData", dataObj)
         frm.reset();
 
-        window.location.reload();
+
+        if (dataOfTable.data3.slice(2)>0) {
+            tddat = `<td class="profit">${dataOfTable.data3}</td>`
+            profCount = profCount + Number(dataOfTable.data3.slice(2));
+        }
+
+        else{
+            tddat = `<td class="loss">${dataOfTable.data3.replace("-","")}</td>`
+            lossCount = lossCount + Number(dataOfTable.data3.slice(2));
+        }
+
+
+        table.insertAdjacentHTML ('afterbegin',`<tr align="start" class="tableData spp${i}">
+                            <td>${dataOfTable.data1}</td>
+                            <td>${dataOfTable.data2}</td>
+                            ${tddat}
+                            <td>${dataOfTable.data4}</td>
+                            <td>${dataOfTable.data5}</td>
+                            <td class="special-child sp${dataArr.length-1-i}"><i class="fa-solid fa-xmark"></i></td>
+                        </tr>`)
+
     }
+
+    if (dataArr != "") {
+        plotGraph(dataArr)
+    }
+
+    console.log(dataArr)
+
 
 })
 
@@ -109,24 +142,26 @@ function appendTable(i) {
 
     let tddat;
 
-    if (fetched[len-1-i].data3.slice(2)>0) {
-        tddat = `<td class="profit">${fetched[len-1-i].data3}</td>`
-        profCount = profCount + Number(fetched[len-1-i].data3.slice(2));
+    if (dataArr[len-1-i].data3.slice(2)>0) {
+        tddat = `<td class="profit">${dataArr[len-1-i].data3}</td>`
+        profCount = profCount + Number(dataArr[len-1-i].data3.slice(2));
     }
 
     else{
-        tddat = `<td class="loss">${fetched[len-1-i].data3.replace("-","")}</td>`
-        lossCount = lossCount + Number(fetched[len-1-i].data3.slice(2));
-        data.push(fetched[len-1-i].data3.slice(3))
+        tddat = `<td class="loss">${dataArr[len-1-i].data3.replace("-","")}</td>`
+        lossCount = lossCount + Number(dataArr[len-1-i].data3.slice(2));
+        data.push(dataArr[len-1-i].data3.slice(3))
     }
+
+    
 
 
     table.innerHTML += `<tr align="start" class="tableData spp${i}">
-                            <td>${fetched[len-1-i].data1}</td>
-                            <td>${fetched[len-1-i].data2}</td>
+                            <td>${dataArr[len-1-i].data1}</td>
+                            <td>${dataArr[len-1-i].data2}</td>
                             ${tddat}
-                            <td>${fetched[len-1-i].data4}</td>
-                            <td>${fetched[len-1-i].data5}</td>
+                            <td>${dataArr[len-1-i].data4}</td>
+                            <td>${dataArr[len-1-i].data5}</td>
                             <td class="special-child sp${len-1-i}"><i class="fa-solid fa-xmark"></i></td>
                         </tr>`
 
@@ -138,24 +173,14 @@ function appendTable(i) {
     income.innerHTML = `₹ ${profCount}`
     moneyLeftAmt.innerHTML = `₹ ${profCount- (-1*(lossCount))}`
 
+}
 
 
-    if (fetched[len-1-i].data2 == "Food & Groceries") {
-        c1 = c1 + fetched[len-1-i].data3.slice(3)
-    }else if(fetched[len-1-i].data2 == "Housing & Bills"){
-        c2 = c2 + fetched[len-1-i].data3.slice(3)
-    }else if(fetched[len-1-i].data2 == "Shopping & Lifestyle"){
-        c3 = c3 + fetched[len-1-i].data3.slice(3)
-    }else if(fetched[len-1-i].data2 == "Health & Education"){
-        c4 = c4 + fetched[len-1-i].data3.slice(3)
-    }else if(fetched[len-1-i].data2 == "Entertainment & Recreation"){
-        c5 = c5 + fetched[len-1-i].data3.slice(3)
-    }else if(fetched[len-1-i].data2 == "Miscellaneous"){
-        c6 = c6 + fetched[len-1-i].data3.slice(3)
-    }else{
-        console.log("bleh")
-    }
+//function for plotting graph
 
+function plotGraph(dataArr) {
+    
+    
 
 
 
@@ -164,14 +189,18 @@ function appendTable(i) {
     }
 
     // Chart.defaults.borderColor = '#f14c52';
+    cata = [];
+    dataArr.forEach(element => {
+        cata.push(element.data3.slice(3))
+    });
 
     myChart = new Chart(ww, {
         type: 'line',
         data: {
-            labels: data.map((_, index) => index + 1),
+            labels: cata.map((_, index) => index + 1),
             datasets: [{
                 label: 'Spent',
-                data: data.reverse(),
+                data: cata,
                 borderWidth: 1
             }]
         },
@@ -185,8 +214,28 @@ function appendTable(i) {
     });
 
 
-    data = []
-    data.push(c1,c2,c3,c4,c5,c6)
+    for (let j = 0; j < dataArr.length; j++) {
+        if (dataArr[j].data2 == "Food & Groceries") {
+            c1 = c1 + Number(dataArr[j].data3.slice(3))
+        }else if(dataArr[j].data2 == "Housing & Bills"){
+            c2 = c2 + Number(dataArr[j].data3.slice(3))
+        }else if(dataArr[j].data2 == "Shopping & Lifestyle"){
+            c3 = c3 + Number(dataArr[j].data3.slice(3))
+        }else if(dataArr[j].data2 == "Health & Education"){
+            c4 = c4 + Number(dataArr[j].data3.slice(3))
+        }else if(dataArr[j].data2 == "Entertainment & Recreation"){
+            c5 = c5 + Number(dataArr[j].data3.slice(3))
+        }else if(dataArr[j].data2 == "Miscellaneous"){
+            c6 = c6 + Number(dataArr[j].data3.slice(3))
+        }else{
+            console.log("bleh")
+        }
+    }
+
+
+
+    let bata = []
+    console.log(c1,c2,c3,c4,c5,c6)
 
     if (myPi) {
         myPi.destroy();
@@ -199,7 +248,7 @@ function appendTable(i) {
             labels: ['Food & Groceries', 'Housing & Bills', 'hopping & Lifestyle', 'Health & Education', 'Entertainment & Recreation', "Miscellaneous"],
             datasets: [{
                 label: '',
-                data: data,
+                data: [c1,c2,c3,c4,c5,c6],
                 borderWidth: 1
             }]
         },
@@ -211,7 +260,6 @@ function appendTable(i) {
             }
         }
     });
-
 }
 
 
@@ -239,8 +287,6 @@ setTimeout(() => {
 
                 let dataObj = JSON.stringify(dataArr)
                 localStorage.setItem("strData", dataObj)
-
-                window.location.reload();
             }
 
         })
