@@ -14,9 +14,6 @@ const totalExp = document.getElementById("ExpenseAmount");
 const income = document.getElementById("incomeAmount");
 const moneyLeftAmt = document.getElementById("moneyLeftAmt");
 
-
-
-
 const ww = document.getElementById('myChartp');
 const ctx = document.getElementById('myChart');
 let dataArr = []
@@ -27,11 +24,51 @@ let lossCount = 0;
 let data = [];
 let len = 0;
 let fetched = [];
-
+let j = 0;
 let c1, c2, c3, c4, c5, c6;
 c1=c2=c3=c4=c5=c6=0;
 
+cata = [];
+    dataArr.forEach(element => {
+        cata.push(element.data3.slice(3))
+    });
 
+    myChart = new Chart(ww, {
+        type: 'line',
+        data: {
+            labels: cata.map((_, index) => index + 1),
+            datasets: [{
+                label: 'Spent',
+                data: cata,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+myPi = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Food & Groceries', 'Housing & Bills', 'hopping & Lifestyle', 'Health & Education', 'Entertainment & Recreation', "Miscellaneous"],
+            datasets: [{
+                label: '',
+                data: [c1,c2,c3,c4,c5,c6],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
 
 
 
@@ -40,6 +77,7 @@ c1=c2=c3=c4=c5=c6=0;
 document.addEventListener("DOMContentLoaded", () => {
     fetched = JSON.parse(localStorage.getItem("strData")) || [];
     dataArr = [...fetched]
+    j = [...fetched]
     len = dataArr.length;
 
     for (let i = 0; i < len; i++) {
@@ -48,6 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (dataArr != "") {
         plotGraph(dataArr)
+        addClass()
+        deleter()
     }
 
 });
@@ -117,7 +157,8 @@ addeer.addEventListener('mouseup', (e)=>{
         }
 
 
-        table.insertAdjacentHTML ('afterbegin',`<tr align="start" class="tableData spp${i}">
+
+        table.insertAdjacentHTML ('afterbegin',`<tr align="start" class="tableData">
                             <td>${dataOfTable.data1}</td>
                             <td>${dataOfTable.data2}</td>
                             ${tddat}
@@ -126,15 +167,18 @@ addeer.addEventListener('mouseup', (e)=>{
                             <td class="special-child sp${dataArr.length-1-i}"><i class="fa-solid fa-xmark"></i></td>
                         </tr>`)
 
+
+
+        
+
+                        
     }
-
-    if (dataArr != "") {
-        plotGraph(dataArr)
-    }
-
-    console.log(dataArr)
-
-
+    totalExp.innerHTML = `₹ ${-1*lossCount}`
+    income.innerHTML = `₹ ${profCount}`
+    moneyLeftAmt.innerHTML = `₹ ${profCount- (-1*(lossCount))}`
+    addClass()
+    plotGraph(dataArr)
+    deleter()
 })
 
 //function which fetches data from localstorage and puts it on table, plots graphs
@@ -156,7 +200,7 @@ function appendTable(i) {
     
 
 
-    table.innerHTML += `<tr align="start" class="tableData spp${i}">
+    table.innerHTML += `<tr align="start" class="tableData">
                             <td>${dataArr[len-1-i].data1}</td>
                             <td>${dataArr[len-1-i].data2}</td>
                             ${tddat}
@@ -168,10 +212,13 @@ function appendTable(i) {
 
 
     const closer = document.getElementById("special-child")
+    addClass()
+    
 
     totalExp.innerHTML = `₹ ${-1*lossCount}`
     income.innerHTML = `₹ ${profCount}`
     moneyLeftAmt.innerHTML = `₹ ${profCount- (-1*(lossCount))}`
+
 
 }
 
@@ -228,19 +275,29 @@ function plotGraph(dataArr) {
         }else if(dataArr[j].data2 == "Miscellaneous"){
             c6 = c6 + Number(dataArr[j].data3.slice(3))
         }else{
-            console.log("bleh")
         }
     }
 
 
 
     let bata = []
-    console.log(c1,c2,c3,c4,c5,c6)
 
     if (myPi) {
         myPi.destroy();
     }
 
+    if (dataArr == "") {
+        c1 = 0
+        c2 = 0
+        c3 = 0
+        c4 = 0
+        c5 = 0
+        c6 = 0
+
+        totalExp.innerHTML = "₹ 0"
+        income.innerHTML = "₹ 0"
+        moneyLeftAmt.innerHTML = "₹ 0"
+    }
 
     myPi = new Chart(ctx, {
         type: 'doughnut',
@@ -263,32 +320,56 @@ function plotGraph(dataArr) {
 }
 
 
+// Class adder 
+
+function addClass() {
+    
+    let tableData = document.querySelectorAll(".tableData")
+    j = tableData.length;
+        for (let i = 0; i < tableData.length; i++) {
+            tableData[i].classList.add(`spp${j-1-i}`)
+        }
+
+
+    console.log(tableData)
+    
+}
 
 
 // to delete table rows
 
-setTimeout(() => {
+
+    setTimeout(() => {
+        
+}, 100);
+
+
+
+
+function deleter() {
     const closer = document.querySelectorAll(".special-child")
 
-    closer.forEach(element => {
-        element.addEventListener('mouseup', (e)=>{
-            let del = element.classList[1]
-            console.log(del)
+        closer.forEach(element => {
+            element.addEventListener('mouseup', (e)=>{
+                let del = element.classList[1]
 
-            let ind = del.slice(2)
-            console.log(ind)
+                let ind = del.slice(2)
 
 
-            let p = document.querySelector(`.spp${ind}`);
+                let p = document.querySelector(`.spp${ind}`);
 
-            if (p) {
-                p.remove();
-                dataArr.splice(ind,1)
+                if (p) {
+                    p.remove();
+                    dataArr.splice(ind,1)
 
-                let dataObj = JSON.stringify(dataArr)
-                localStorage.setItem("strData", dataObj)
-            }
+                    let dataObj = JSON.stringify(dataArr)
+                    localStorage.setItem("strData", dataObj)
+                    plotGraph(dataArr)
 
-        })
+                }
+
+
+            })
+
     });
-}, 100);
+}
