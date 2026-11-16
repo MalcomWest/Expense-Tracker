@@ -32,12 +32,12 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100vh;
 }
 
 
 main {
     display: flex;
-    border: 1px solid var(--gray-color);
     height: 100%;
     width: 100%;
 }
@@ -180,13 +180,13 @@ main {
     display: flex;
     flex-direction: column;
     width: 100%;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    height: 100%;
 }
 
 
 nav {
-    height: 81px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -199,6 +199,8 @@ nav {
 
 
 .mainNavLeft {
+    height: 81px;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -244,6 +246,8 @@ nav {
     display: flex;
     gap: 20px;
     flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
 }
 
 
@@ -304,13 +308,16 @@ nav {
     display: grid;
     grid-template-columns: 300px 1fr;
     gap: 20px;
+    /* height: 100%; */
 }
 
 
 .graphs > * {
     border-radius: 5px;
     background-color: var(--gray-color);
-    height: 300px;
+    /* height: 100%;
+    display: grid;
+    align-items: center; */
 }
 
 
@@ -324,7 +331,7 @@ nav {
     width: 100%;
     border: 1px solid var(--gray-color);
     border-radius: 5px;
-    max-height: 250px;
+    height: 100%;
     min-height: 248px;
 }
 
